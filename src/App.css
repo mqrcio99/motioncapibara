@@ -1,0 +1,446 @@
+:root {
+  --laranja: #f97316;
+  --laranja-escuro: #ea580c;
+  --preto: #18181b;
+  --cinza: #3f3f46;
+  --fundo: #e5e5e5;
+  --branco: #ffffff;
+
+  font-family: 'Sora', system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: var(--cinza);
+  background: var(--fundo);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  overflow-x: hidden;
+}
+
+/* ---------- Animated gradient background ---------- */
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pagina::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+    120deg,
+    #e5e5e5 0%,
+    #fde4cf 25%,
+    #fed7aa 50%,
+    #fde4cf 75%,
+    #e5e5e5 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 14s ease infinite;
+}
+
+.pagina::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(249, 115, 22, 0.18), transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(234, 88, 12, 0.16), transparent 45%);
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.conteudo {
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  perspective: 1000px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 880px;
+  height: 60px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+  z-index: 100;
+}
+
+.logo {
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+}
+
+.menu {
+  display: flex;
+  gap: 26px;
+}
+
+.menu a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .menu {
+    display: none;
+  }
+}
+
+/* ---------- Glass cards (reference style) ---------- */
+.glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(249, 115, 22, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.4s ease;
+}
+
+.glass:hover {
+  box-shadow:
+    0 16px 48px rgba(249, 115, 22, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Floating animation wrapper */
+.flutuar {
+  animation: flutuar 6s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.hero {
+  padding: 56px 44px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.22),
+    rgba(234, 88, 12, 0.14)
+  );
+}
+
+.hero h1 {
+  font-size: 46px;
+  line-height: 1.08;
+  margin: 0 0 16px;
+  color: var(--preto);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.laranja {
+  color: var(--laranja-escuro);
+}
+
+.hero p {
+  font-size: 18px;
+  margin: 0 0 30px;
+  color: var(--cinza);
+  line-height: 1.5;
+}
+
+.hero-botoes {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero {
+    padding: 40px 24px;
+  }
+}
+
+/* ---------- Blocos ---------- */
+.bloco {
+  padding: 34px 32px;
+}
+
+.bloco h2 {
+  font-size: 23px;
+  color: var(--preto);
+  margin: 0 0 6px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.legenda {
+  font-size: 13px;
+  color: #71717a;
+  margin: 0 0 24px;
+}
+
+.duplo {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.duplo .metade {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.divisor-v {
+  width: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0 20px;
+}
+
+@media (max-width: 640px) {
+  .duplo {
+    flex-direction: column;
+  }
+  .divisor-v {
+    width: 100%;
+    height: 1px;
+    margin: 16px 0;
+  }
+}
+
+/* ---------- Botões grid ---------- */
+.botoes-grid {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ---------- Shimmer sweep on buttons ---------- */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+  animation: shimmer 0.7s ease;
+}
+
+@keyframes shimmer {
+  0%   { left: -120%; }
+  100% { left: 140%; }
+}
+
+/* ---------- Slider ---------- */
+.slider {
+  width: 220px;
+  height: 6px;
+  border-radius: 999px;
+  accent-color: #f97316;
+  cursor: pointer;
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 13px;
+  color: #71717a;
+}
+
+/* ---------- Hero avatar ---------- */
+.hero-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  border: 4px solid rgba(249, 115, 22, 0.6);
+  box-shadow: 0 8px 28px rgba(249, 115, 22, 0.35);
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ---------- Cards row ---------- */
+.cards-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---------- Card perfil ---------- */
+.card-perfil {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 20px;
+  cursor: pointer;
+}
+
+.card-perfil-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f97316;
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3);
+  margin-bottom: 4px;
+}
+
+.card-perfil-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.card-perfil-nome {
+  font-weight: 700;
+  font-size: 16px;
+  color: #18181b;
+  margin: 0;
+}
+
+.card-perfil-sub {
+  font-size: 12px;
+  color: #71717a;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+/* ---------- Card problema ---------- */
+.card-problema {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 20px;
+  cursor: pointer;
+  background: rgba(249, 115, 22, 0.12) !important;
+  border-color: rgba(249, 115, 22, 0.3) !important;
+}
+
+.card-problema-icone {
+  font-size: 40px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+  margin-bottom: 4px;
+}
+
+.card-problema-titulo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #18181b;
+  margin: 0;
+  text-align: center;
+}
+
+.card-problema-sub {
+  font-size: 12px;
+  color: #71717a;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+/* ---------- Header avatar (photo) ---------- */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+}
